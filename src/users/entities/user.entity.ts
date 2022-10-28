@@ -9,11 +9,8 @@ export class User {
   @Prop({ unique: true })
   email: string;
 
-  @Prop()
-  firstname: string;
-
-  @Prop()
-  lastname: string;
+  @Prop({})
+  consents: [];
 
   @Prop({ immutable: true })
   created_at: Date;

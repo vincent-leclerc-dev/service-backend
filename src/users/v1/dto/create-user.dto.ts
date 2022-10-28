@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/indent */
 import {
-  IsNotEmpty, IsOptional, IsString,
+  IsNotEmpty, IsString, IsOptional, IsArray,
 } from 'class-validator';
 
 export default class CreateUserDto {
@@ -8,20 +8,8 @@ export default class CreateUserDto {
     @IsNotEmpty()
     email: string;
 
-    @IsString()
-    @IsNotEmpty()
-    @IsOptional()
-    firstname: string;
-
-    @IsString()
-    @IsNotEmpty()
-    @IsOptional()
-    lastname: string;
-
-    /*
     @IsArray()
     @IsNotEmpty()
     @IsOptional()
-    events: [Event];
-    */
+    consents: [];
 }
