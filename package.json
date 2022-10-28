@@ -60,6 +60,7 @@
     "dotenv": "^16.0.1",
     "helmet": "5.0.1",
     "js-convert-case": "4.2.0",
+    "mailchecker": "^5.0.3",
     "mongoose": "^6.7.0",
     "nestjs-pino": "3.1.1",
     "pino-http": "6.6.0",

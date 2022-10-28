@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
+import MailChecker from 'mailchecker';
 import { FilterQuery, Model, Types } from 'mongoose';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, UnprocessableEntityException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import ExceptionMessages from '@/constants/exception-messages';
@@ -12,6 +13,8 @@ import {
   User,
   UserDocument,
 } from '../entities/user.entity';
+
+const MONGO_DUPLICATE_ERROR_CODE = 11000;
 
 @Injectable()
 export default class UsersService {
@@ -26,9 +29,20 @@ export default class UsersService {
   async create(body: CreateUserDto): Promise<User> {
     this.logger.log('creating new user');
 
-    const newUser = await this.userModel.create(body);
+    if (!MailChecker.isValid(body.email)) {
+      throw new UnprocessableEntityException();
+    }
+    try {
+      const newUser = await this.userModel.create(body);
 
-    return newUser.toObject();
+      return await newUser.toObject();
+    } catch (e) {
+      if (e.code === MONGO_DUPLICATE_ERROR_CODE) {
+        throw new UnprocessableEntityException();
+      }
+
+      throw e;
+    }
   }
 
   async findAll(queryParams: QueryParamsUserDto): Promise<User[]> {
