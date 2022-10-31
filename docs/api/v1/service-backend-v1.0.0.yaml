@@ -1,0 +1,50 @@
+openapi: "3.0.0"
+info:
+  title: Swagger backend
+  version: "v1.0.0"
+tags:
+  - name: backend endpoints
+    description: endpoints endpoints
+servers:
+  - url: http://localhost:2000/v1
+paths:
+
+    post:
+      summary: "Start an action like validate or reject an account subscription"
+      operationId: "actions-account-subscription"
+      tags:
+        - Account subscription endpoints
+      parameters:
+        - name: "uuid"
+          in: "path"
+          description: "UUID of Account subscription to reject"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+                  enum: ['validate', 'reject']
+                updated_by:
+                  type: "string"
+            example: {
+              name: "reject",
+              updated_by: "62c541826e2ac5466be71992"
+            }
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/account_subscription"
+        "404":
+          description: "Account subscription not found"
+components:
+  schemas:
