@@ -1,23 +1,28 @@
-/* eslint-disable @typescript-eslint/indent */
-// import { Prop } from '@nestjs/mongoose';
+import { Type } from 'class-transformer';
 import {
-  IsNotEmpty, IsEnum, IsMongoId, IsString, IsBoolean,
+  ArrayNotEmpty,
+  IsNotEmpty, ValidateNested,
 } from 'class-validator';
 
-import { NotificationType } from '../../../models/notifications/entity';
+import {
+  ApiProperty,
+} from '@nestjs/swagger';
 
-export default class CreateUserDto {
-    @IsEnum(NotificationType)
-    @IsNotEmpty()
-    id: NotificationType;
+import PartialUserDto from './partial-user-dto';
+import ConsentDto from '../../../../../common/dtos/consent-dto';
 
-    @IsBoolean()
-    @IsNotEmpty()
-    enabled: boolean;
+export default class CreateEventDto {
+  @ApiProperty()
+  @Type(() => PartialUserDto)
+  @IsNotEmpty()
+    user: PartialUserDto;
 
-    @IsString()
-    @IsMongoId()
-    @IsNotEmpty()
-    // @Prop({ type: [{ type: Types.ObjectId, ref: User.name }] })
-    user: string/* User | Types.ObjectId */;
+  @ApiProperty({
+    isArray: true,
+    type: ConsentDto,
+  })
+  @ValidateNested({ each: true })
+  @Type(() => ConsentDto)
+  @ArrayNotEmpty()
+    consents: ConsentDto[];
 }

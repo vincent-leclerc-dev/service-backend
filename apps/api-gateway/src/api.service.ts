@@ -1,9 +1,9 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import dump from './config/env.dump';
+
+import dump from 'apps/config/env.dump';
 
 @Injectable()
-/* eslint-disable class-methods-use-this */
 export default class AppService implements OnModuleInit {
   private readonly logger = new Logger(AppService.name);
 
@@ -33,4 +33,3 @@ export default class AppService implements OnModuleInit {
     return data;
   }
 }
-/* eslint-enable class-methods-use-this */

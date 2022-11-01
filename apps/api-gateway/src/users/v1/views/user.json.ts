@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-// import { Event } from '../../../events/entities/event.entity';
-import { User } from '../../entities/user.entity';
+import { User } from '../../../../../models/user.entity';
 
 export default function userToJSON(user: User) {
   const usr: any = { ...user };
@@ -13,17 +12,12 @@ export default function userToJSON(user: User) {
   // filter consents
   const consents = usr?.consents || [];
 
-  console.log(consents);
-
   usr.consents = consents.map((consent: any) => {
     const cst: any = { ...consent };
     delete cst._id;
     delete cst.created_at;
     return cst;
   });
-
-  console.log(user);
-  console.log(usr);
 
   return usr;
 }

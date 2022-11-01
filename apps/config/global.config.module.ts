@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import config from './index';
+import config from 'apps/config/index';
 import validate from './env.validate';
 
 @Global()

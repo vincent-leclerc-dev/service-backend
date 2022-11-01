@@ -1,21 +1,24 @@
 import { Job } from 'bull';
-import { Process, Processor } from '@nestjs/bull';
 import { Model, Types } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
+
+import { Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 
 import {
-  Event,
-  EventDocument,
-} from '../entities/event.entity';
+  Event, EventDocument,
+  User, UserDocument,
+} from '../../../models';
 
-@Processor('notifications-queue')
+@Processor(process.env.EVENTS_QUEUE)
 export default class NotificationsProcessor {
   private readonly logger = new Logger(NotificationsProcessor.name);
 
   constructor(
     @InjectModel(Event.name)
     private eventModel: Model<EventDocument>,
+    @InjectModel(User.name)
+    private userModel: Model<UserDocument>,
   ) {
   }
 
@@ -26,6 +29,7 @@ export default class NotificationsProcessor {
 
     const createBody = { ...job.data };
     createBody.user = new Types.ObjectId(job.data.user.toString());
+
     await this.eventModel.create(createBody);
 
     this.logger.log('end process notification');

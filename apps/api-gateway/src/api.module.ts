@@ -1,22 +1,15 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
-// import { ConfigModule, ConfigService } from '@nestjs/config';
-// import { MongooseModule } from '@nestjs/mongoose';
-import * as mongoose from 'mongoose';
-// import validate from '@/config/env.validate';
-// import config from '@/config';
-import DatabaseModule from './providers/database/database.module';
+
+import AllExceptionsFilter from '../../common/errors/all-exceptions.filter';
+import DatabaseModule from '../../providers/database/database.module';
+import GlobalConfigModule from 'apps/config/global.config.module';
 
 import UsersModule from './users/v1/users.module';
 import EventsModule from './events/v1/events.module';
-import AllExceptionsFilter from './errors/all-exceptions.filter';
-import AppController from './api.controller';
-import AppService from './api.service';
-import GlobalConfigModule from './config/global.config.module';
 
-if (process.env.DEBUG === 'true') {
-  mongoose.set('debug', true);
-}
+import ApiController from './api.controller';
+import ApiService from './api.service';
 
 @Module({
   imports: [
@@ -25,9 +18,9 @@ if (process.env.DEBUG === 'true') {
     UsersModule,
     EventsModule,
   ],
-  controllers: [AppController],
+  controllers: [ApiController],
   providers: [
-    AppService,
+    ApiService,
     {
       provide: APP_FILTER,
       useClass: AllExceptionsFilter,
@@ -35,4 +28,4 @@ if (process.env.DEBUG === 'true') {
   ],
 })
 
-export default class AppModule {}
+export default class ApiModule {}

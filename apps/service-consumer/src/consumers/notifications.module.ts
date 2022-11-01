@@ -1,16 +1,22 @@
-import { BullModule } from '@nestjs/bull';
-import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { Module } from '@nestjs/common';
+
+import QueueModule from 'apps/providers/queue/queue.module';
+import {
+  Event, eventEntity,
+  User, userEntity,
+} from 'apps/models';
+
 import NotificationsProcessor from './notifications.processor';
-import { Event, eventEntity } from '../entities/event.entity';
 
 @Module({
   imports: [
-    BullModule.registerQueue({
-      name: 'notifications-queue',
-    }),
+    QueueModule,
     MongooseModule.forFeature([
       { name: Event.name, schema: eventEntity },
+    ]),
+    MongooseModule.forFeature([
+      { name: User.name, schema: userEntity },
     ]),
   ],
   providers: [NotificationsProcessor],

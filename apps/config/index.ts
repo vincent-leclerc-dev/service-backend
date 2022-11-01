@@ -5,7 +5,7 @@ const {
   version,
   endpoints,
   engines,
-} = require('../../../../package.json');
+} = require('../../package.json');
 
 export default () => ({
   db: {
@@ -21,7 +21,12 @@ export default () => ({
     useNewUrlParser: true,
     wtimeout: 2500,
   },
+  server: {
+    host: process.env.API_HOST || '0.0.0.0',
+    port: process.env.API_PORT || '2000',
+  },
   consumer: {
+    host: process.env.CONSUMER_HOST || '0.0.0.0',
     port: process.env.CONSUMER_PORT || '3000',
   },
   service: {
@@ -32,4 +37,6 @@ export default () => ({
     hostname: hostname(),
     startedAt: new Date(),
   },
+  dump: (process.env.DUMP === 'true'),
+  debug: (process.env.DEBUG === 'true'),
 });

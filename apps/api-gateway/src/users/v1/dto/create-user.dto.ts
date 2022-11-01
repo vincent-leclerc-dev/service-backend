@@ -1,20 +1,25 @@
-/* eslint-disable @typescript-eslint/indent */
 import { Type } from 'class-transformer';
 import {
-  IsNotEmpty, IsString, IsOptional, IsArray, ValidateNested, ArrayNotEmpty,
+  IsNotEmpty, IsString, ValidateNested, ArrayNotEmpty, IsEmail, IsOptional,
 } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
-import CreateEventDto from '../../../events/v1/dto/create-event.dto';
+import ConsentDto from '../../../../../common/dtos/consent-dto';
 
 export default class CreateUserDto {
-    @IsString()
-    @IsNotEmpty()
+  @ApiProperty()
+  @IsEmail()
+  @IsString()
+  @IsNotEmpty()
     email: string;
 
-    @IsArray()
-    @ArrayNotEmpty()
-    @ValidateNested({ each: true })
-    @Type(() => CreateEventDto)
-    @IsOptional()
-    consents: CreateEventDto[];
+  @ApiProperty({
+    isArray: true,
+    type: ConsentDto,
+  })
+  @ValidateNested({ each: true })
+  @Type(() => ConsentDto)
+  @ArrayNotEmpty()
+  @IsOptional()
+    consents?: ConsentDto[];
 }

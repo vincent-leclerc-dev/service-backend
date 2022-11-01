@@ -11,11 +11,11 @@
   ],
   "arch": "x64",
   "engines": {
-    "node": ">=14.15.1",
-    "npm": ">=6.14.8",
+    "node": ">=16.18.0",
+    "npm": ">=8.19.2",
     "mongodb": ">=4.4"
   },
-  "endpoint": {
+  "endpoints": {
     "v1": "1.0"
   },
   "repository": {
@@ -37,12 +37,12 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "build:docker": "docker build .",
-    "start": "nest start",
+    "start": "nest start api-gateway",
     "start:dev": "NODE_ENV=development nest start --watch api-gateway",
     "start:debug": "DEBUG=true NODE_ENV=development nest start --debug --watch api-gateway",
     "start:prod": "NODE_ENV=production node dist/main",
     "start-consumer:dev": "NODE_ENV=development nest start --watch service-consumer",
-    "start-consumer:debug": "NODE_ENV=development nest start --watch service-consumer",
+    "start-consumer:debug": "DEBUG=true NODE_ENV=development nest start --watch service-consumer",
     "start-consumer:prod": "NODE_ENV=production node dist/main"
   },
   "dependencies": {
