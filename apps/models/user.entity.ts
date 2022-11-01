@@ -12,9 +12,8 @@ export class User {
   @Prop({ unique: true, required: true })
     email: string;
 
-  // @Prop([{ type: s.Types.ObjectId, ref: 'Event' }])
   @Prop()
-    consents: [];
+    consents: object[];
 
   @Prop({ immutable: true })
     created_at: Date;

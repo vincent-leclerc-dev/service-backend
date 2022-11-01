@@ -48,7 +48,7 @@ export default class UsersService {
           },
           consents: body.consents,
         };
-        this.eventsService.sendEvent(createEventPayload);
+        await this.eventsService.sendEvent(createEventPayload);
       }
 
       return await newUser.toObject();

@@ -1,5 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 import { Job } from 'bull';
 import { Model, Types } from 'mongoose';
+import Promise from 'bluebird';
+import _ from 'lodash';
 
 import { Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
@@ -8,7 +11,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import {
   Event, EventDocument,
   User, UserDocument,
-} from '../../../models';
+} from 'apps/models';
+import ConsentDto from 'apps/common/dtos/consent-dto';
 
 @Processor(process.env.EVENTS_QUEUE)
 export default class NotificationsProcessor {
@@ -24,14 +28,37 @@ export default class NotificationsProcessor {
 
   @Process()
   async processNotification(job: Job) {
-    this.logger.log('start process notification');
-    this.logger.debug(job.data);
+    this.logger.debug('start process notification');
 
-    const createBody = { ...job.data };
-    createBody.user = new Types.ObjectId(job.data.user.toString());
+    const data = { ...job.data };
+    this.logger.debug(data);
 
-    await this.eventModel.create(createBody);
+    const userId = new Types.ObjectId(job.data.user.toString());
 
-    this.logger.log('end process notification');
+    const user = await this.userModel.findOne({ _id: userId });
+
+    const mergeConsents = _.merge(_.keyBy(user.consents, 'id'), _.keyBy(data.consents, 'id'));
+
+    // update user
+    await this.userModel.updateOne(
+      { _id: userId },
+      {
+        $set: {
+          consents: _.map(mergeConsents, (it) => it),
+        },
+      },
+      { lean: true, new: true },
+    );
+
+    // create events history
+    await Promise.map(data.consents, async (consent: ConsentDto) => {
+      await this.eventModel.create({
+        user: data.user._id,
+        id: consent.id,
+        enabled: consent.enabled,
+      });
+    });
+
+    this.logger.debug('end process notification');
   }
 }
