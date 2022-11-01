@@ -5,6 +5,9 @@
 - [Techinals informations](#techinals-informations)
   - [Stack](#stack)
   - [Prerequisites](#prerequisites)
+  - [Start containers](#start-containers)
+    - [mongodb](#mongodb)
+    - [redis](#redis)
   - [Run Api Gateway](#run-api-gateway)
     - [with build](#with-build)
     - [with watch mode](#with-watch-mode)
@@ -29,6 +32,21 @@
 - [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 - [NestJS cli](https://docs.nestjs.com/)
 - [Docker Desktop](https://docs.docker.com/get-docker/)
+
+
+### Start containers
+
+#### mongodb
+
+```bash
+docker-compose up -d service-backend-mongodb
+```
+
+#### redis
+
+```bash
+docker-compose up -d service-backend-redis
+```
 
 ### Run Api Gateway
 
