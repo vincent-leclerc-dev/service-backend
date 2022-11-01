@@ -1,14 +1,14 @@
 import { ConfigService } from '@nestjs/config';
-import AppService from "@/app.service";
-import AppController from "@/api/app.controller";
+import ApiService from '../../../apps/api-gateway/src/api.service';
+import ApiController from '../../../apps/api-gateway/src/api.controller';
 
-describe('AppController', () => {
-  let appController: AppController;
-  let appService: AppService;
+describe('ApiController', () => {
+  let apiController: ApiController;
+  let apiService: ApiService;
 
   beforeEach(() => {
-    appService = new AppService(new ConfigService());
-    appController = new AppController(appService);
+    apiService = new ApiService(new ConfigService());
+    apiController = new ApiController(apiService);
   });
 
   describe('getIndex', () => {
@@ -22,9 +22,9 @@ describe('AppController', () => {
         endpoints: <object>undefined,
       };
 
-      jest.spyOn(appService, 'getIndex').mockImplementation(() => result);
+      jest.spyOn(apiService, 'getIndex').mockImplementation(() => result);
 
-      expect(await appController.getIndex()).toBe(result);
+      expect(await apiController.getIndex()).toBe(result);
     });
   });
 });

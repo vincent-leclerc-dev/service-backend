@@ -11,8 +11,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import {
   Event, EventDocument,
   User, UserDocument,
-} from 'apps/models';
-import ConsentDto from 'apps/common/dtos/consent-dto';
+} from '../../../models';
+import ConsentDto from '../../../common/dtos/consent-dto';
 
 @Processor(process.env.EVENTS_QUEUE)
 export default class NotificationsProcessor {

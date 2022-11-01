@@ -35,15 +35,4 @@ export class ReactionSteps {
       });
     }
   }
-
-  @then(/the response should have "([^"]*)" elements/)
-  public countResponseElements(stringCount: string) {
-    const expectedCount = parseInt(stringCount);
-
-    const results = Array.isArray(this.workspace.response.body) ? this.workspace.response.body : [this.workspace.response.body];
-
-    assert.equal(results.length, expectedCount);
-
-  }
-
 }

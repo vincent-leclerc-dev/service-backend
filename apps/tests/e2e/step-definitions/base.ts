@@ -1,6 +1,6 @@
 import { binding, before, after} from 'cucumber-tsflow';
 import { Test, TestingModule } from '@nestjs/testing';
-import AppModule from '../../../src/api/app.module';
+import ApiModule from '../../../api-gateway/src/api.module';
 import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
 import compression from "@fastify/compress";
 import fastifyHelmet from "@fastify/helmet";
@@ -17,7 +17,7 @@ export class Base {
   public async before(): Promise<void> {
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [ApiModule],
     }).compile();
 
     this.workspace.app = moduleFixture.createNestApplication<NestFastifyApplication>(

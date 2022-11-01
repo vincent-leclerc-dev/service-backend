@@ -4,12 +4,12 @@ import { FilterQuery, Model, Types } from 'mongoose';
 import { Injectable, Logger, UnprocessableEntityException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import ExceptionMessages from 'apps/common/constants/exception-messages';
-import ObjectValidationFailedException from 'apps/common/errors/object-validation-failed.exception';
+import ExceptionMessages from '../../../../common/constants/exception-messages';
+import ObjectValidationFailedException from '../../../../common/errors/object-validation-failed.exception';
 import {
   User,
   UserDocument,
-} from 'apps/models/user.entity';
+} from '../../../../models/user.entity';
 
 import EventsService from '../../events/v1/events.service';
 import CreateEventDto from '../../events/v1/dto/create-event.dto';
@@ -40,12 +40,10 @@ export default class UsersService {
     try {
       const newUser = await this.userModel.create(body);
 
-      // generate consent change history
+      // generate consents changes history on create too.
       if (body?.consents) {
         const createEventPayload: CreateEventDto = {
-          user: {
-            id: newUser._id,
-          },
+          user: newUser._id,
           consents: body.consents,
         };
         await this.eventsService.sendEvent(createEventPayload);

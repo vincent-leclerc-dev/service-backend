@@ -1,7 +1,7 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import dump from 'apps/config/env.dump';
+import dump from '../../config/env.dump';
 
 @Injectable()
 export default class AppService implements OnModuleInit {

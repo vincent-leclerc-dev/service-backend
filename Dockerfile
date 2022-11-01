@@ -11,7 +11,7 @@ COPY package*.json tsconfig*.json ./
 RUN npm ci
 
 # Import source code
-COPY src src
+COPY apps apps
 
 # Build app code and move to build directory to copy with one layer at next stage
 RUN npm run build \
@@ -31,4 +31,4 @@ COPY --from=builder /app/build ./
 RUN npm ci --production
 
 # Start the app
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/apps/api-gateway/main.js"]

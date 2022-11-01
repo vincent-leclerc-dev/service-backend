@@ -3,7 +3,7 @@ import { APP_FILTER } from '@nestjs/core';
 
 import AllExceptionsFilter from '../../common/errors/all-exceptions.filter';
 import DatabaseModule from '../../providers/database/database.module';
-import GlobalConfigModule from 'apps/config/global.config.module';
+import GlobalConfigModule from '../../config/global.config.module';
 
 import UsersModule from './users/v1/users.module';
 import EventsModule from './events/v1/events.module';

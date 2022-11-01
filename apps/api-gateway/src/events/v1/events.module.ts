@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import QueueModule from 'apps/providers/queue/queue.module';
+import QueueModule from '../../../../providers/queue/queue.module';
 
 import EventsService from './events.service';
 import EventsController from './events.controller';

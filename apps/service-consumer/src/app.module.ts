@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
-import DatabaseModule from 'apps/providers/database/database.module';
-import GlobalConfigModule from 'apps/config/global.config.module';
-import QueueModule from 'apps/providers/queue/queue.module';
+import DatabaseModule from '../../providers/database/database.module';
+import GlobalConfigModule from '../../config/global.config.module';
+import QueueModule from '../../providers/queue/queue.module';
 
 import ConsumerModule from './consumers/notifications.module';
 

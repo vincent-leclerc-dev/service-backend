@@ -1,11 +1,11 @@
 import { MongooseModule } from '@nestjs/mongoose';
 import { Module } from '@nestjs/common';
 
-import QueueModule from 'apps/providers/queue/queue.module';
+import QueueModule from '../../../providers/queue/queue.module';
 import {
   Event, eventEntity,
   User, userEntity,
-} from 'apps/models';
+} from '../../../models';
 
 import NotificationsProcessor from './notifications.processor';
 
