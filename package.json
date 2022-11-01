@@ -37,10 +37,11 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "build:docker": "docker build .",
-    "start": "nest start api-gateway",
+    "start": "NODE_ENV=developmen nest start api-gateway",
     "start:dev": "NODE_ENV=development nest start --watch api-gateway",
     "start:debug": "DEBUG=true NODE_ENV=development nest start --debug --watch api-gateway",
     "start:prod": "NODE_ENV=production node dist/apps/api-gateway/main",
+    "start-consumer": "NODE_ENV=development nest start service-consumer",
     "start-consumer:dev": "NODE_ENV=development nest start --watch service-consumer",
     "start-consumer:debug": "DEBUG=true NODE_ENV=development nest start --watch service-consumer",
     "start-consumer:prod": "NODE_ENV=production node dist/apps/service-consumer/main"

@@ -4,16 +4,15 @@
 
 - [Techinals informations](#techinals-informations)
   - [Stack](#stack)
-- [Prerequisites](#prerequisites)
-  - [Code quality](#code-quality)
-    - [Lint](#lint)
-    - [Unit tests](#unit-tests)
-    - [Husky](#husky)
-    - [Run](#run)
-      - [with build](#with-build)
-      - [with watch mode](#with-watch-mode)
-      - [with watch and debug mode](#with-watch-and-debug-mode)
-      - [Docker](#docker)
+  - [Prerequisites](#prerequisites)
+  - [Run Api Gateway](#run-api-gateway)
+    - [with build](#with-build)
+    - [with watch mode](#with-watch-mode)
+    - [with watch and debug mode](#with-watch-and-debug-mode)
+  - [Run events consumer](#run-events-consumer)
+    - [with build](#with-build-1)
+    - [with watch mode](#with-watch-mode-1)
+    - [with watch and debug mode](#with-watch-and-debug-mode-1)
 
 ## Techinals informations
 
@@ -21,46 +20,52 @@
 
 - NestJS with Fastify
 - MongoDB with mongoose
+- Redis
 - Docker with compose
 
-## Prerequisites
+### Prerequisites
 
 - [Node.js and npm](https://nodejs.org/en/download/)
 - [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 - [NestJS cli](https://docs.nestjs.com/)
 - [Docker Desktop](https://docs.docker.com/get-docker/)
 
-### Code quality
+### Run Api Gateway
 
-#### Lint
-
-#### Unit tests
-
-#### Husky
-
-#### Run
-
-##### with build
+#### with build
 
 ```bash
 npm start
 ```
 
-##### with watch mode
+#### with watch mode
 
 ```bash
 npm run start:dev
 ```
 
-##### with watch and debug mode
+#### with watch and debug mode
 
 ```bash
 npm run start:debug
 ```
 
-##### Docker
+### Run events consumer
 
-``` bash
-docker-compose build
-docker-compose up
+#### with build
+
+```bash
+npm start-consumer
+```
+
+#### with watch mode
+
+```bash
+npm run start-consumer:dev
+```
+
+#### with watch and debug mode
+
+```bash
+npm run start-consumer:debug
 ```
