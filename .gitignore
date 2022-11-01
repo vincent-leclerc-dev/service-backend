@@ -19,7 +19,7 @@ lerna-debug.log*
 
 # Tests
 /test/node_modules
-/coverage
+/apps/coverage
 /.nyc_output
 
 # IDEs and editors
