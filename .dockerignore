@@ -1,0 +1,11 @@
+*.DS_Store
+.dockerignore
+.eslintrc.js
+.prettierrc
+.git
+.gitignore
+Dockerfile
+node_module/
+npm-debug.log
+README.*
+test/

@@ -29,7 +29,6 @@ services:
       dockerfile: ApiGateway.Dockerfile 
     ports:
       - 2000:2000
-      - 9229:9229
     env_file:
       - .development.env
     depends_on:
@@ -43,7 +42,6 @@ services:
       dockerfile: ServiceConsumer.Dockerfile 
     ports:
       - 3000:3000
-      - 9229:9229
     env_file:
       - .development.env
     depends_on:

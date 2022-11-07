@@ -31,4 +31,4 @@ COPY --from=builder /app/build ./
 RUN npm ci --production
 
 # Start the app
-CMD ["node", "dist/apps/service-gateway/main.js"]
+CMD ["node", "dist/service-consumer/src/main.js"]
